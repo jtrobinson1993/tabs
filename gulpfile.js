@@ -6,6 +6,7 @@ const minifyJS = require('gulp-uglifyjs');
 const minifyCSS = require('gulp-clean-css');
 const minifyHTML = require('gulp-cleanhtml');
 const autoPrefixer = require('gulp-autoprefixer');
+const concat = require('gulp-concat');
 
 gulp.task('default', ['sass', 'js', 'html']);
 
@@ -29,7 +30,8 @@ gulp.task('js', () => {
 		presets: ['es2015', 'es2016']
 	}))
 	.pipe(minifyJS())
-	.pipe(gulp.dest('./web/build'));
+	.pipe(concat('app.js'))
+	.pipe(gulp.dest('./web/build/js'));
 });
 
 gulp.task('html', () => {

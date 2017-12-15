@@ -4,25 +4,30 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.14/moment-timezone-with-data.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
 <body>
+<div id="page-background" v-bind:style="{ background-image: url(photo) }"></div>
 <main id="main-container">
-    <div id="page-background">
-        <section id="time-widget">
-
-        </section>
-        <div id="weather-widget">
-            <div id="temperature">
-                {{ message }}
-                <button @click="toggleTemp">Toggle Units</button>
-            </div>
+    <section id="time-widget">
+        <div class="time">
+            <span class="hours">{{ hours }}</span>
+            <span class="minutes">{{ minutes }}</span>
+            <span class="seconds">{{ seconds }}</span>
         </div>
-        <div id="article-widget">
-
+    </section>
+    <section id="weather-widget">
+        <div id="temperature">
+            {{ message }}
+            <button @click="toggleTemp">Toggle Units</button>
         </div>
-    </div>
+    </section>
+    <section id="article-widget">
+
+    </section>
 </main>
 <script src="js/app.js"></script>
 </body>

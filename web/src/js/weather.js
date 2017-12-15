@@ -21,13 +21,12 @@ function toggleTemp() {
 }
 
 function convertKelvin(unit) {
-	return temperature.unit === 'c' ? temperature.temp - 273.15 : temperature.temp * 1.8 - 459.67;
+	return unit === 'c' ? temperature.temp - 273.15 : temperature.temp * 1.8 - 459.67;
 }
 
 function getWeather(location) {
 	axios.get('//api.openweathermap.org/data/2.5/weather?q=' + location + '&units=kelvin&APPID=467b7f9da56b5b4d8c144ff534ebef09')
 		 .then(function (response) {
-			 console.log(response);
 			 const kelvin = response.data.main.temp;
 			 const fahrenheit = kelvin * (9/5) - 459.67;
 			 const celsius = (fahrenheit - 32) / 1.8;
