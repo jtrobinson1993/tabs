@@ -4,6 +4,7 @@ const sass = require('gulp-sass');
 const babel = require('gulp-babel');
 const minifyJS = require('gulp-uglifyjs');
 const minifyCSS = require('gulp-clean-css');
+const replace = require('gulp-replace');
 const minifyHTML = require('gulp-cleanhtml');
 const autoPrefixer = require('gulp-autoprefixer');
 const concat = require('gulp-concat');
@@ -44,6 +45,7 @@ gulp.task('html', () => {
   return gulp
     .src('./web/src/**/*.html')
     .pipe(minifyHTML())
+    .pipe(replace(/\>[\s]+\</g, '><'))
     .pipe(gulp.dest('./web/build'));
 });
 
