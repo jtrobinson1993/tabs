@@ -13,10 +13,12 @@
     "gulp-clean-css": "^3.7.0",
     "gulp-cleanhtml": "^1.0.3",
     "gulp-concat": "^2.6.1",
+    "gulp-prettier": "^1.1.0",
     "gulp-sass": "^3.1.0",
     "gulp-uglifyjs": "^0.6.2"
   },
   "devDependencies": {
+    "prettier": "1.9.2",
     "sass": "^1.0.0-beta.4"
   },
   "scripts": {
