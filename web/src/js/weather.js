@@ -4,47 +4,44 @@ var temperature = new Vue({
 		temp: '0',
 		message: 'Loading...',
 		unit: 'c'
+	},
+	methods: {
+		getWeather(location) {
+			const vm = this;
+			axios.get('https://api.openweathermap.org/data/2.5/weather?q=' + location + '&units=kelvin&APPID=467b7f9da56b5b4d8c144ff534ebef09')
+				 .then(function (response) {
+					 const kelvin = response.data.main.temp;
+					 const fahrenheit = kelvin * (9/5) - 459.67;
+					 const celsius = (fahrenheit - 32) / 1.8;
+					 const temp = Math.round(fahrenheit) + ' / ' + Math.round(celsius);
+					 vm.temp = kelvin;
+					 vm.message = temp;
+				 })
+				 .catch(function (error) {
+					 console.log(error);
+				 });
+		},
+		convertKelvin(unit) {
+			return unit === 'c' ? this.temp - 273.15 : this.temp * 1.8 - 459.67;
+		},
+		toggleTemp() {
+			if (this.unit === 'c') {
+				this.message = Math.round(this.convertKelvin('f')) + 'fahrenheit';
+				this.unit = 'f';
+			} else if (this.unit === 'f') {
+				this.message = Math.round(this.temp) + 'kelvin';
+				this.unit = 'k'
+			} else {
+				this.message = Math.round(this.convertKelvin('c')) + 'celsius';
+				this.unit = 'c';
+			}
+		}
+	},
+	mounted() {
+		const location = 'Lincoln';
+		this.getWeather(location);
+		setInterval(() => {
+			this.getWeather(location);
+		}, 600000);
 	}
 });
-
-function toggleTemp() {
-	if (temperature.unit === 'c') {
-		temperature.message = Math.round(convertKelvin('f')) + 'fahrenheit';
-		temperature.unit = 'f';
-	} else if (temperature.unit === 'f') {
-		temperature.message = Math.round(temperature.temp) + 'kelvin';
-		temperature.unit = 'k'
-	} else {
-		temperature.message = Math.round(convertKelvin('c')) + 'celsius';
-		temperature.unit = 'c';
-	}
-}
-
-function convertKelvin(unit) {
-	return unit === 'c' ? temperature.temp - 273.15 : temperature.temp * 1.8 - 459.67;
-}
-
-function getWeather(location) {
-	axios.get('//api.openweathermap.org/data/2.5/weather?q=' + location + '&units=kelvin&APPID=467b7f9da56b5b4d8c144ff534ebef09')
-		 .then(function (response) {
-			 const kelvin = response.data.main.temp;
-			 const fahrenheit = kelvin * (9/5) - 459.67;
-			 const celsius = (fahrenheit - 32) / 1.8;
-			 const temp = Math.round(fahrenheit) + ' / ' + Math.round(celsius);
-			 temperature.temp = kelvin;
-			 temperature.message = temp;
-		 })
-		 .catch(function (error) {
-			 console.log(error);
-		 });
-}
-
-function init() {
-	const location = 'Lincoln';
-	getWeather(location);
-	setInterval(() => {
-		getWeather(location);
-	}, 600000);
-}
-
-init();

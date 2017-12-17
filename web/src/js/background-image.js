@@ -5,7 +5,8 @@ let backgroundImage = new Vue({
 	},
 	methods: {
 		getRedditImage(subreddit) {
-			axios.get(`//www.reddit.com/r/${subreddit}/top/.json?sort=top&t=month`)
+			const vm = this;
+			axios.get(`https://www.reddit.com/r/${subreddit}/top/.json?sort=top&t=month`)
 				 .then(function (response) {
 					 console.log(response);
 					 const listing = response.data.data.children;
@@ -14,9 +15,9 @@ let backgroundImage = new Vue({
 					 const randomPost = listing[Math.round(Math.random() * 25)];
 					 const randomImage = randomPost.data.url;
 					 
-					 self.photo = randomImage;
+					 vm.photo = randomImage;
 					 console.log(listing);
-					 console.log(listingLength);
+					 console.log(randomImage);
 				 })
 				 .catch(function (error) {
 					 console.log(error);
