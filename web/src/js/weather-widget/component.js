@@ -1,6 +1,6 @@
-var temperature = new Vue({
-  el: '#temperature',
-  data: { temp: '0', message: 'Loading...', unit: 'c' },
+module.exports = Vue.component('weather-widget', {
+  template: require('./template.html'),
+  data: () => ({ temp: '0', message: 'Loading...', unit: 'c' }),
   methods: {
     getWeather(location) {
       axios

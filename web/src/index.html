@@ -15,26 +15,16 @@
 </head>
 
 <body>
-  <div id="page-background" v-bind:style="{ backgroundImage: 'url(' + photo + ')' }"></div>
-  <main id="main-container">
-    <section id="time-widget">
-      <div class="time">
-        <span class="hours">{{ hours }}</span><span class="colon">:</span>
-        <span class="minutes">{{ minutes }}</span><span class="colon">:</span>
-        <span class="seconds">{{ seconds }}</span>
-      </div>
-    </section>
-    <section id="weather-widget">
-      <div id="temperature">
-        {{ message }}
-        <button @click="toggleTemp">Toggle Units</button>
-      </div>
-    </section>
-    <section id="article-widget">
-
-    </section>
-  </main>
-  <script src="js/app.js"></script>
+  <div id="app">
+    <background-image></background-image>
+    <main id="main-container">
+      <time-widget></time-widget>
+      <weather-widget></weather-widget>
+      <section id="article-widget">
+      </section>
+    </main>
+  </div>
+  <script src="js/index.js"></script>
 </body>
 
 </html>

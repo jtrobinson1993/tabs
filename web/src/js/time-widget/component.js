@@ -1,6 +1,6 @@
-let time = new Vue({
-  el: '#time-widget',
-  data: { hours: '00', minutes: '00', seconds: '00' },
+module.exports = Vue.component('time-widget', {
+  template: require('./template.html'),
+  data: () => ({ hours: '00', minutes: '00', seconds: '00' }),
   methods: {
     time() {
       const currTime = moment();

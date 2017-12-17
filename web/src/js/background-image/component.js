@@ -1,6 +1,6 @@
-let backgroundImage = new Vue({
-  el: '#page-background',
-  data: { photo: '' },
+module.exports = Vue.component('background-image', {
+  template: require('./template.html'),
+  data: () => ({ photo: '' }),
   methods: {
     checkIfImage(url) {
       const extension = url.split('.').pop();
