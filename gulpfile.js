@@ -13,7 +13,7 @@ gulp.task('default', ['sass', 'js', 'html']);
 
 gulp.task('sass', () => {
   return gulp
-    .src('./web/src/**/*.sass')
+    .src('./web/src/**/*.scss')
     .pipe(
       sass({
         paths: [path.join(__dirname, 'styles', 'includes')]
@@ -25,7 +25,8 @@ gulp.task('sass', () => {
       })
     )
     .pipe(minifyCSS())
-    .pipe(gulp.dest('./web/build/'));
+    .pipe(concat('styles.css'))
+    .pipe(gulp.dest('./web/build/styles'));
 });
 
 gulp.task('js', () => {

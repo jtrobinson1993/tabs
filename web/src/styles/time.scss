@@ -1,0 +1,11 @@
+@import 'config';
+
+#time-widget {
+  font-size: 3rem;
+  font-family: $font-mono;
+  color: $white;
+  line-height: 1;
+  .minutes + .colon, .seconds {
+    font-size: .67em;
+  }
+}
