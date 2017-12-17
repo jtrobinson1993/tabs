@@ -8,6 +8,10 @@ const replace = require('gulp-replace');
 const minifyHTML = require('gulp-cleanhtml');
 const autoPrefixer = require('gulp-autoprefixer');
 const concat = require('gulp-concat');
+const browserify = require('browserify');
+const babelify = require('babelify');
+const stringify = require('stringify');
+const source = require('vinyl-source-stream');
 
 gulp.task('default', ['sass', 'js', 'html']);
 
@@ -30,15 +34,12 @@ gulp.task('sass', () => {
 });
 
 gulp.task('js', () => {
-  return gulp
-    .src('./web/src/**/*.js')
-    .pipe(
-      babel({
-        presets: ['es2015', 'es2016']
-      })
-    )
-    .pipe(minifyJS())
-    .pipe(concat('app.js'))
+  return browserify({ entries: ['./web/src/js'] })
+    .transform(stringify(['.html']))
+    .transform('babelify', { presets: [ 'es2015', 'es2016' ] })
+    .transform('uglifyify')
+    .bundle()
+    .pipe(source('index.js'))
     .pipe(gulp.dest('./web/build/js'));
 });
 
