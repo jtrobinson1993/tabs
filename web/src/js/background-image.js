@@ -20,6 +20,8 @@ let backgroundImage = new Vue({
           console.log(listing);
           let isImage = false;
 
+          /* if the supplied url doesnt have an extension in the array of 
+            acceptable extensions, find another image */
           while (isImage === false) {
             const randomPost = listing[Math.floor(Math.random() * listingLength)];
             const randomImage = randomPost.data.url;
